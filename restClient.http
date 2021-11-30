@@ -1,0 +1,2 @@
+###
+GET https://api-coffee-flask.herokuapp.com/api/products HTTP/1.1

@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { media, setColor, setFlex } from "../../styles";
 
-export const MainCart = styled.main`
-  padding: 7rem 1rem;
-  ${media.tablet`
-  padding: 7rem 5rem;
-  `}
+export const CartMain = styled.main`
+  .title {
+    color: ${setColor.subtitle};
+  }
+  .desc {
+    color: ${setColor.descColor};
+  }
 `;
 
 export const CartWrapper = styled.section`

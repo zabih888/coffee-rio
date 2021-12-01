@@ -14,7 +14,18 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { Link } from "react-router-dom";
-import { CartHeader, CartList, CartSummary,CartItem, CartEmpty, CartWrapper, MainCart, SummaryItem } from "./Cart.style";
+import {
+  CartHeader,
+  CartList,
+  CartSummary,
+  CartItem,
+  CartEmpty,
+  CartWrapper,
+  MainCart,
+  SummaryItem,
+  CartMain,
+} from "./Cart.style";
+import { PrimaryBtn } from "../../components/Global/Buttons";
 // import { useQuery } from "../../hooks/useQuery";
 
 const CartPage = () => {
@@ -31,33 +42,34 @@ const CartPage = () => {
   };
 
   return (
-    <MainCart>
+    <CartMain className="container">
       {cart.length ? (
         <CartWrapper>
           <CartSummary>
-            <h5>جمع کل سبد خرید</h5>
+            <h5 className="title">جمع کل سبد خرید</h5>
             <SummaryItem>
               <div className="frist">
-                <p>جمع جزء</p>
+                <p className="title">جمع جزء</p>
                 <p>{total}</p>
               </div>
               <div className="second">
                 <FormControl component="fieldset">
-                  <FormLabel component="legend">حمل و نقل</FormLabel>
+                  <FormLabel component="legend" className="title">حمل و نقل</FormLabel>
                   <RadioGroup
                     aria-label="gender"
                     name="controlled-radio-buttons-group"
                   >
                     <FormControlLabel
                       onClick={() => dispatch({ type: "REGULER_POST" })}
-                      value="female"
+                      value="reguler"
                       control={<Radio />}
+                      className="desc"
                       label="تیپاکس (پس کرایه - زمان تحویل 24 الی 72 ساعت)"
                     />
                     <FormControlLabel
                       onClick={() => dispatch({ type: "SPECIAL_POST" })}
-                      className="fontFarsi"
-                      value="male"
+                      className="desc"
+                      value="special"
                       control={<Radio />}
                       label="پست پیشتاز (زمان تحویل ۳ الی ۴ روز کاری)"
                     />
@@ -69,34 +81,32 @@ const CartPage = () => {
                 <h2>{total + post}</h2>
               </div>
             </SummaryItem>
-            <Button
-              LinkComponent={Link}
+            <Link
               to="/signup?redirect=/checkout"
               // to={`/signup?redirect=${checkout}`}
-              variant="contained"
             >
-              ادامه جهت تسویه
-            </Button>
+              <PrimaryBtn>ادامه جهت تسویه</PrimaryBtn>
+            </Link>
           </CartSummary>
 
           <CartList>
             <CartHeader>
-              <p className="text">جمع + تخفیف</p>
-              <p className="text">تعداد</p>
-              <p className="text">قیمت</p>
+              <p className="title">جمع + تخفیف</p>
+              <p className="title">تعداد</p>
+              <p className="title">قیمت</p>
               {matchesSM ? undefined : (
-                <p className="text" style={{ width: "30%"}}>
+                <p className="title" style={{ width: "30%" }}>
                   توضیحات
                 </p>
               )}
-              <p className="text">محصول</p>
+              <p className="title">محصول</p>
             </CartHeader>
-            
+
             {cart.map((item) => (
               <>
                 <CartItem>
                   <div className="cartPrice">
-                    <p>تومان {item.off_price * item.quantity}</p>
+                    <p className="title">تومان {item.off_price * item.quantity}</p>
                   </div>
                   <div className="cartButton">
                     <button onClick={() => decreamentHandler(item)}>
@@ -109,11 +119,11 @@ const CartPage = () => {
                     </button>
                   </div>
                   <div className="cartPrice">
-                    <p>تومان {item.price}</p>
+                    <p className="title">تومان {item.price}</p>
                   </div>
                   {matchesSM ? undefined : (
                     <div className="cartDesc">
-                      <p>{item.description}</p>
+                      <p className="title">{item.description}</p>
                     </div>
                   )}
                   <div className="cartImg">
@@ -128,17 +138,14 @@ const CartPage = () => {
       ) : (
         <CartEmpty>
           <h2>سبد خرید شما در حال حاضر خالی است</h2>
-          <Button
-            color="primary"
-            variant="contained"
-            LinkComponent={Link}
-            to="/shop"
-          >
-            بازگشت به فروشگاه
-          </Button>
+          <Link to="/shop">
+            <PrimaryBtn style={{ width: !matchesSM ? "30%" : undefined }}>
+              بازگشت به فروشگاه
+            </PrimaryBtn>
+          </Link>
         </CartEmpty>
       )}
-    </MainCart>
+    </CartMain>
   );
 };
 

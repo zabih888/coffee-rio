@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { setColor, setTransition } from "../../styles";
+import { media, setColor, setTransition } from "../../styles";
 
-export const PrimaryBtn = styled.a`
+export const PrimaryBtn = styled.button`
   display: inline-block;
   width: 100%;
   text-align: center;

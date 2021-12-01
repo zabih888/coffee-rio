@@ -34,55 +34,13 @@ const CartReducer = (state, action) => {
         return { ...state, cart: filteredCart };
       } else {
         updatedItem.quantity--;
-        return { ...state, cart: updatedCart };
+        return {
+          ...state,
+          cart: updatedCart,
+          total: state.total - action.payload.off_price,
+        };
       }
     }
-
-    case "ADD_CUP": {
-      const updatedCup = [...state.cup];
-      const updatedItemIndex = updatedCup.findIndex(
-        (item) => item.id === action.payload.id
-      );
-
-      if (updatedItemIndex < 0) {
-        updatedCup.push({ ...action.payload, quantity: 1 });
-      } else {
-        const updatedItem = { ...updatedCup[updatedItemIndex] };
-        updatedItem.quantity++;
-        updatedCup[updatedItemIndex] = updatedItem;
-      }
-      return {
-        ...state,
-        cup: updatedCup,
-      };
-    }
-    case "NEW": {
-      const updatedNew = [...state.newModel];
-      updatedNew.push({ ...action.payload, quantity: 1 });
-      return {
-        ...state,
-        newModel: updatedNew,
-      };
-    }
-    case "REMOVE_CUP": {
-      const updatedCup = [...state.cup];
-      const updatedItemIndex = updatedCup.findIndex(
-        (item) => item.id === action.payload.id
-      );
-
-      const updatedItem = updatedCup[updatedItemIndex];
-
-      if (updatedItem.quantity === 1) {
-        const filteredCup = updatedCup.filter(
-          (item) => item.id !== action.payload.id
-        );
-        return { ...state, cart: filteredCup };
-      } else {
-        updatedItem.quantity--;
-        return { ...state, cart: updatedCup };
-      }
-    }
-
     case "REGULER_POST": {
       return {
         ...state,

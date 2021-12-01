@@ -8,9 +8,6 @@ const initialState = {
   cart: [],
   total: 0,
   post: 0,
-  cup: [],
-  toti: [],
-  newModel: [],
 };
 
 const CartProvider = ({ children }) => {

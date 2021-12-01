@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import * as dataCup from "../data";
-import { useCartActions, useCart } from "../context/CartProvider";
+import { useCartActions } from "../context/CartProvider";
 import { media, setColor } from "../styles";
 
 const Cup = () => {
@@ -11,10 +11,14 @@ const Cup = () => {
   };
 
   return (
-    <MainCup>
+    <CupMain className="container">
       <SectionCup>
         {dataCup.cupRio.map((item) => (
-          <CupItem onClick={() => {cupAddHandler(item)}}>
+          <CupItem
+            onClick={() => {
+              cupAddHandler(item);
+            }}
+          >
             <CupImg>
               <img src={item.image_url} />
             </CupImg>
@@ -29,23 +33,14 @@ const Cup = () => {
           </CupItem>
         ))}
       </SectionCup>
-    </MainCup>
+    </CupMain>
   );
 };
 export default Cup;
 
-export const MainCup = styled.main`
-  padding: 3rem 0rem;
-  ${media.mobile`  
-  padding: 3rem 3rem;
-  `}
-  ${media.mobile`  
-  padding: 3rem 5rem;
-  `}
-`;
+export const CupMain = styled.main``;
 
 export const SectionCup = styled.section`
-  margin-top: 4rem;
   direction: rtl;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -64,6 +59,7 @@ export const CupItem = styled.div`
   border-radius: 10px;
   display: flex;
   padding: 20px 0;
+  cursor: pointer;
 `;
 
 export const CupImg = styled.div`

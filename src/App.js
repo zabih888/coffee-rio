@@ -10,7 +10,8 @@ import { ThemeProvider } from "@emotion/react";
 import theme from "./components/UI/Theme";
 import CartProvider from "./context/CartProvider";
 import Cup from "./pages/Cup";
-
+import Signup from "./components/Login_Signup/Signup";
+import Login from "./components/Login_Signup/Login";
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +21,8 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/cup" element={<Cup />} />

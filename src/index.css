@@ -8,3 +8,15 @@
 body {
   font-family: "Shabnam" !important;
 }
+button{
+  font-family: "Shabnam" !important;
+}
+
+.container {
+  padding: 7rem 1rem;
+}
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 7rem 5rem;
+  }
+}

@@ -1,7 +1,7 @@
 import axios from "axios";
 // 
-axios.defaults.baseURL = "http://localhost:5000/api";               
-// axios.defaults.baseURL = "https://api-coffee-flask.herokuapp.com/api";               
+// axios.defaults.baseURL = "http://localhost:5000/api";               
+axios.defaults.baseURL = "https://api-coffee-flask.herokuapp.com/api";               
 
 const http = {
   get: axios.get,

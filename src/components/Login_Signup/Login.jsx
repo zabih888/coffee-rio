@@ -2,21 +2,41 @@ import { Box } from "@mui/system";
 import TextField from "@mui/material/TextField";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button } from "@mui/material";
+import {
+  Alert,
+  Button,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+} from "@mui/material";
 import { ErrorHelper } from "../Global/ErrorHelper";
 
 import { Form } from "./Signup_Login.style";
 import { Link } from "react-router-dom";
-
+import { loginUser } from "../../services/loginService";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 const Login = () => {
+  const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  //   const submitForm = (data) => console.log(data);
-  const submitForm = () => {};
+  const submitForm = async (values) => {
+    try {
+      const { data } = await loginUser(values);
+    } catch (error) {
+      if (error.response && error.response.data.message)
+        setError(error.response.data.message);
+    }
+  };
 
   return (
     <div
@@ -28,29 +48,54 @@ const Login = () => {
         <Box component="form" onSubmit={handleSubmit(submitForm)}>
           <TextField
             className="input"
-            error={errors.firstName ? true : false}
-            id="firstName"
-            label="نام"
+            error={errors.userName ? true : false}
+            id="userName"
+            label="نام کاربری"
             variant="outlined"
-            {...register("firstName", {
+            {...register("userName", {
               required: "نام کاربری نیاز است",
               minLength: { value: 3, message: "حداقل 3 کاراکتر وارد کنید" },
             })}
           />
-          {errors.firstName && (
-            <ErrorHelper>{errors.firstName.message}</ErrorHelper>
+          {errors.userName && (
+            <ErrorHelper>{errors.userName.message}</ErrorHelper>
           )}
 
-          <TextField
+          {/* <TextField
             className="input"
-            error={errors.email ? true : false}
-            id="email"
+            error={errors.userName ? true : false}
+            id="userName"
             label="ایمیل"
             type="email"
             variant="outlined"
             {...register("email", { required: "ایمیل نیاز است" })}
           />
-          {errors.email && <ErrorHelper>{errors.email.message}</ErrorHelper>}
+          {errors.email && <ErrorHelper>{errors.email.message}</ErrorHelper>} */}
+
+          <FormControl
+            className="input"
+            variant="outlined"
+            error={errors.password ? true : false}
+          >
+            <InputLabel htmlFor="password">رمز کاربری</InputLabel>
+            <OutlinedInput
+              name="password"
+              type={showPassword ? "text" : "password"}
+              id="password"
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton edge="end" onClick={handleClickShowPassword}>
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="رمز کاربری"
+              {...register("password", { required: "رمز کابری نیاز است" })}
+            />
+            {errors.password && (
+              <ErrorHelper>{errors.password.message}</ErrorHelper>
+            )}
+          </FormControl>
 
           <Button
             style={{ fontSize: "18px", marginTop: "1rem" }}
@@ -67,8 +112,9 @@ const Login = () => {
                 : false
             }
           >
-            ثبت نام
+            ورود
           </Button>
+          {error && <Alert color="error">{error}</Alert>}
           <Link to="/signup">ثبت نام نکرده اید ؟</Link>
         </Box>
       </Form>

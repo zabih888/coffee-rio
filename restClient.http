@@ -1,2 +1,23 @@
 ###
 GET https://api-coffee-flask.herokuapp.com/api/products HTTP/1.1
+###
+POST https://api-coffee-flask.herokuapp.com/api/users/register HTTP/1.1
+content-type: application/json
+
+{
+    "firstName": "ronaldo",
+    "lastName": "ronaldo",
+    "userName": "ronaldo",
+    "password": "123456789",
+    "phoneNumber": "09381530461",
+    "email": "ronaldo@gmail.com"
+}
+
+###
+POST https://api-coffee-flask.herokuapp.com/api/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "userName": "ronaldo",
+    "password": "123456789"
+}

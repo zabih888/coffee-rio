@@ -50,10 +50,10 @@ const ShopPage = () => {
               <h5 className="productName">{item.name}</h5>
               <div className="productPriceWrapper">
                 <div className="productOffPrice" style={{ display: "flex" }}>
-                  <span className="discount">%۱۰</span>
+                  <span className="discount">{item.discount}%</span>
                   <p className="price">{item.price}</p>
                 </div>
-                <p className="finalPrice">تومان{item.off_price}</p>
+                <p className="finalPrice">تومان {item.off_price}</p>
               </div>
               <PrimaryBtn
                 onClick={() => addToCartHander(item)}

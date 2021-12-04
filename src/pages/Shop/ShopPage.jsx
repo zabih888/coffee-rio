@@ -1,10 +1,17 @@
-import { Button, CircularProgress } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useCartActions } from "../../context/CartProvider.js";
 import WidgetsIcon from "@mui/icons-material/Widgets";
-import {PrimaryBtn} from "../../components/Global/Buttons"
-import { FilterBtn, FilterMain, ProductContainer, ProductMain } from "./Shop.style.js";
+import { PrimaryShop } from "../../components/Global/Buttons";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import {
+  FilterBtn,
+  FilterMain,
+  ProductContainer,
+  ProductMain,
+} from "./Shop.style.js";
+import { Link } from "react-router-dom";
 
 const ShopPage = () => {
   const [data, setData] = useState([]);
@@ -34,12 +41,12 @@ const ShopPage = () => {
     const filterProduct = data.filter((item) => item.category === typeFilter);
     setDataF(filterProduct);
   };
-  const addToCartHander = (item) => {
-    dispatch({ type: "ADD_TO_CART", payload: item });
-  };
+  // const addToCartHander = (item) => {
+  //   dispatch({ type: "ADD_TO_CART", payload: item });
+  // };
 
   return (
-    <ProductMain className="container" >
+    <ProductMain className="container">
       <section className="productList">
         {dataF.map((item) => (
           <div className="product">
@@ -55,11 +62,14 @@ const ShopPage = () => {
                 </div>
                 <p className="finalPrice">تومان {item.off_price}</p>
               </div>
-              <PrimaryBtn
-                onClick={() => addToCartHander(item)}
-              >
-                ادامه
-              </PrimaryBtn>
+              <Link to={`/shop/itemid`}>
+                <PrimaryShop>
+                  ادامه
+                  <span>
+                    <ArrowForwardIcon />
+                  </span>
+                </PrimaryShop>
+              </Link>
             </div>
           </div>
         ))}
@@ -88,4 +98,3 @@ const ShopPage = () => {
 };
 
 export default ShopPage;
-

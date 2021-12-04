@@ -8,6 +8,7 @@ export const setColor = {
   gold: "#d7b46a",
   Black: "#000000",
   white: "#ffffff",
+  footerColor: "#333333",
 };
 
 export const setFlex = ({ x = "center", y = "center" } = {}) => {

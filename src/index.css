@@ -20,3 +20,12 @@ button{
     padding: 7rem 5rem;
   }  
 }
+
+.containerp{
+  padding: 7rem 1rem;
+}
+@media screen and (min-width: 768px) {
+  .containerp {
+    padding: 7rem 10rem;
+  } 
+}

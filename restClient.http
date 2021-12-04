@@ -1,6 +1,8 @@
 ###
 GET https://api-coffee-flask.herokuapp.com/api/products HTTP/1.1
 ###
+Get https://api-coffee-flask.herokuapp.com/api/products?id=3 HTTP/1.1
+###
 POST https://api-coffee-flask.herokuapp.com/api/users/register HTTP/1.1
 content-type: application/json
 

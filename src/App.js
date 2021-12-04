@@ -13,6 +13,8 @@ import Signup from "./components/Login_Signup/Signup";
 import Login from "./components/Login_Signup/Login";
 import AuthProvider from "./context/AuthProvider";
 import Checkout from "./pages/CheckoutPage";
+import ShopUniquePage from "./pages/Shop/ShopUniquePage";
+import Footer from "./components/UI/Footer/Footer";
 function App() {
   return (
     <BrowserRouter>
@@ -26,10 +28,12 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/shop" element={<Shop />} />
+              <Route path="/shop/itemid" element={<ShopUniquePage />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/cup" element={<Cup />} />
               <Route path="/checkout" element={<Checkout />} />
             </Routes>
+            <Footer />
           </CartProvider>
         </ThemeProvider>
       </AuthProvider>

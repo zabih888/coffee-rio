@@ -20,6 +20,34 @@ export const PrimaryBtn = styled.button`
   }
 `;
 
+export const PrimaryShop = styled.button`
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  border-radius: 10px;
+  background-color: ${setColor.gold};
+  color: ${setColor.white};
+  padding: 10px 20px;
+  border: 1px solid ${setColor.gold};
+  cursor: pointer;
+  /* ${setTransition({ time: ".2s" })}; */
+  &:hover {
+    background-color: #b58b30;
+    span{
+      transform: translateX(15px);
+      ${setTransition({ time: ".4s" })};
+    }
+  }
+
+  span {
+    margin-left: 0.7rem;
+    ${setTransition({ time: ".4s" })};
+  }
+`;
+
 export const SecondaryBtn = styled.a`
   background: ${setColor.gold};
   color: ${setColor.white};
@@ -72,5 +100,3 @@ export const SecondaryBtn = styled.a`
     transition: 400ms ease all;
   }
 `;
-
-

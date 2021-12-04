@@ -96,7 +96,7 @@ const CartPage = () => {
               <p className="title">قیمت</p>
               {matchesSM ? undefined : (
                 <p className="title" style={{ width: "30%" }}>
-                  توضیحات
+                  نام
                 </p>
               )}
               <p className="title">محصول</p>
@@ -125,7 +125,7 @@ const CartPage = () => {
                   </div>
                   {matchesSM ? undefined : (
                     <div className="cartDesc">
-                      <p className="title">{item.description}</p>
+                      <p className="title">{item.name}</p>
                     </div>
                   )}
                   <div className="cartImg">

@@ -1,6 +1,6 @@
 import { Box } from "@mui/system";
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   Button,
@@ -16,27 +16,40 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Form } from "./Signup_Login.style";
 import { Link } from "react-router-dom";
 import { signupUser } from "../../services/signupService";
-
+import { useQuery } from "../../hooks/useQuery";
+import { useAuth, useAuthActions } from "../../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
+  const query = useQuery();
+  const redirect = query.get("redirect") || "/";
+  const setAuth = useAuthActions();
+  const auth = useAuth();
+  const navigate = useNavigate();
+
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-  const handleClickShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  useEffect(() => {
+    if (auth) navigate(redirect);
+  }, [redirect, auth]);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   const submitForm = async (values) => {
     try {
       const { data } = await signupUser(values);
-      console.log(values);
+      setAuth(data);
+      navigate(redirect)
     } catch (error) {
-      if (error.response && error.response.data.message) {
-        setError(error.response.data.message);
-      }
+      console.log(error.response.data.massage);
+      setError(error.response.data.massage);
     }
   };
 
@@ -164,8 +177,9 @@ const Signup = () => {
           >
             ثبت نام
           </Button>
-          {error && <Alert color="error">{error}</Alert>}
-          <Link to="/login">قبلا ثبت نام کرده اید</Link>
+          {/* {error && <Alert color="error">{error}</Alert>} */}
+          {error ? <Alert color="error">{error}</Alert> : undefined}
+          <Link to={`/login?redirect=${redirect}`}>قبلا ثبت نام کرده اید</Link>
         </Box>
       </Form>
     </div>

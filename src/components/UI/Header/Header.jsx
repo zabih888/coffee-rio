@@ -24,10 +24,12 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { useCart } from "../../../context/CartProvider";
+import { useAuth } from "../../../context/AuthProvider";
 
 const Header = () => {
   const matchesTablet = useMediaQuery("(min-width: 768px)");
   const { cart } = useCart();
+  const auth = useAuth();
   const iOS =
     typeof navigator !== "undefined" &&
     /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -123,10 +125,15 @@ const Header = () => {
       ) : undefined}
 
       <NavLeft>
-        {!matchesTablet ? (
+        {/* {!matchesTablet ? (
           <span>
             <PersonIcon className="icon" />
           </span>
+        ) : (
+          <Link to="/login">عضویت / ورود</Link>
+        )} */}
+        {auth ? (
+          <Link to="/profile">پروفایل</Link>
         ) : (
           <Link to="/login">عضویت / ورود</Link>
         )}

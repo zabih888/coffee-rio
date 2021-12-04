@@ -1,6 +1,6 @@
 import { Box } from "@mui/system";
 import TextField from "@mui/material/TextField";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   Alert,
@@ -12,14 +12,27 @@ import {
   OutlinedInput,
 } from "@mui/material";
 import { ErrorHelper } from "../Global/ErrorHelper";
-
 import { Form } from "./Signup_Login.style";
 import { Link } from "react-router-dom";
 import { loginUser } from "../../services/loginService";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { useAuth, useAuthActions } from "../../context/AuthProvider";
+import { useQuery } from "../../hooks/useQuery";
+
 const Login = () => {
+  const query = useQuery();
+  const redirect = query.get("redirect") || "/";
+  const setAuth = useAuthActions();
+  const auth = useAuth();
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (auth) navigate(redirect);
+  }, [redirect, auth]);
+
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -32,9 +45,11 @@ const Login = () => {
   const submitForm = async (values) => {
     try {
       const { data } = await loginUser(values);
+      setAuth(data);
+      navigate(redirect)
     } catch (error) {
-      if (error.response && error.response.data.message)
-        setError(error.response.data.message);
+      console.log(error.response.data.massage);
+      setError(error.response.data.massage);
     }
   };
 
@@ -60,17 +75,6 @@ const Login = () => {
           {errors.userName && (
             <ErrorHelper>{errors.userName.message}</ErrorHelper>
           )}
-
-          {/* <TextField
-            className="input"
-            error={errors.userName ? true : false}
-            id="userName"
-            label="ایمیل"
-            type="email"
-            variant="outlined"
-            {...register("email", { required: "ایمیل نیاز است" })}
-          />
-          {errors.email && <ErrorHelper>{errors.email.message}</ErrorHelper>} */}
 
           <FormControl
             className="input"
@@ -114,8 +118,8 @@ const Login = () => {
           >
             ورود
           </Button>
-          {error && <Alert color="error">{error}</Alert>}
-          <Link to="/signup">ثبت نام نکرده اید ؟</Link>
+          {error ? <Alert color="error">{error}</Alert> : undefined}
+          <Link to={`/signup?redirect=${redirect}`}>ثبت نام نکرده اید ؟</Link>
         </Box>
       </Form>
     </div>

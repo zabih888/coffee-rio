@@ -5,7 +5,6 @@ import { useCart, useCartActions } from "../../context/CartProvider";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import {
-  Button,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -21,16 +20,15 @@ import {
   CartItem,
   CartEmpty,
   CartWrapper,
-  MainCart,
   SummaryItem,
   CartMain,
 } from "./Cart.style";
 import { PrimaryBtn } from "../../components/Global/Buttons";
-// import { useQuery } from "../../hooks/useQuery";
+import { useQuery } from "../../hooks/useQuery";
 
 const CartPage = () => {
-  //   const query = useQuery();
-  //   const redirect = query.get("redirect") || "/";
+  const query = useQuery();
+  const redirect = query.get("redirect") || "/";
   const matchesSM = useMediaQuery("(max-width: 900px)");
   const { cart, total, post } = useCart();
   const dispatch = useCartActions();
@@ -54,7 +52,9 @@ const CartPage = () => {
               </div>
               <div className="second">
                 <FormControl component="fieldset">
-                  <FormLabel component="legend" className="title">حمل و نقل</FormLabel>
+                  <FormLabel component="legend" className="title">
+                    حمل و نقل
+                  </FormLabel>
                   <RadioGroup
                     aria-label="gender"
                     name="controlled-radio-buttons-group"
@@ -106,7 +106,9 @@ const CartPage = () => {
               <>
                 <CartItem>
                   <div className="cartPrice">
-                    <p className="title">تومان {item.off_price * item.quantity}</p>
+                    <p className="title">
+                      تومان {item.off_price * item.quantity}
+                    </p>
                   </div>
                   <div className="cartButton">
                     <button onClick={() => decreamentHandler(item)}>

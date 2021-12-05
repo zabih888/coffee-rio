@@ -11,6 +11,7 @@ import {
   ProductContainer,
   ProductMain,
 } from "./Shop.style.js";
+import { getProducts } from "../../services/productsService.js";
 import { Link } from "react-router-dom";
 
 const ShopPage = () => {
@@ -23,13 +24,11 @@ const ShopPage = () => {
     const fetch = async () => {
       try {
         setLoading(true);
-        axios
-          .get("https://api-coffee-flask.herokuapp.com/api/products")
-          .then((response) => {
-            setLoading(false);
-            setData(response.data.data);
-            setDataF(response.data.data);
-          });
+        getProducts().then((response) => {
+          setLoading(false);
+          setData(response.data.data);
+          setDataF(response.data.data);
+        });
       } catch (error) {
         console.log(error);
       }
@@ -41,9 +40,7 @@ const ShopPage = () => {
     const filterProduct = data.filter((item) => item.category === typeFilter);
     setDataF(filterProduct);
   };
-  // const addToCartHander = (item) => {
-  //   dispatch({ type: "ADD_TO_CART", payload: item });
-  // };
+  
 
   return (
     <ProductMain className="container">
@@ -62,7 +59,7 @@ const ShopPage = () => {
                 </div>
                 <p className="finalPrice">تومان {item.off_price}</p>
               </div>
-              <Link to={`/shop/itemid`}>
+              <Link to={`/shop/${item.id}`}>
                 <PrimaryShop>
                   ادامه
                   <span>

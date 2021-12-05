@@ -1,4 +1,3 @@
-
 import { List, ListItem, MenuItem } from "@mui/material";
 import styled from "styled-components";
 import { media, setColor, setFlex } from "../../../styles";
@@ -66,10 +65,10 @@ export const NavLeft = styled.div`
     `}
   }
 
-  .badgeHaderWrapper{
+  .badgeHaderWrapper {
     position: relative;
 
-    .badgeHader{
+    .badgeHader {
       text-align: center;
       color: ${setColor.white};
       position: absolute;
@@ -86,12 +85,12 @@ export const NavLeft = styled.div`
 // SIDEBAR
 
 export const SideList = styled(List)`
- width: 50vw;
-`
+  width: 50vw;
+`;
 export const SlideItem = styled(ListItem)`
- display: flex;
- justify-content: space-between !important;
-`
+  display: flex;
+  justify-content: space-between !important;
+`;
 export const MenuItemSlide = styled(MenuItem)`
- padding-right: 20% !important;
-`
+  padding-right: 20% !important;
+`;

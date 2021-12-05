@@ -14,8 +14,6 @@ import logo from "../../../assets/images/logo.png";
 import SearchIcon from "@mui/icons-material/Search";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import MenuIcon from "@mui/icons-material/Menu";
-import PersonIcon from "@mui/icons-material/Person";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import {
   List,
   ListItem,
@@ -81,20 +79,8 @@ const Header = () => {
                 }}
               >
                 <Link to="/shop">فروشگاه</Link>
-                <span onClick={() => setOpenMenuShop(!openMenuShop)}>
-                  <KeyboardArrowDownIcon />
-                </span>
               </SlideItem>
-              {openMenuShop ? (
-                <div>
-                  <MenuItemSlide>قهوه ترک</MenuItemSlide>
-                  <MenuItemSlide>قهوه دمی</MenuItemSlide>
-                  <MenuItemSlide>هورکا</MenuItemSlide>
-                  <MenuItemSlide>لوازم جانبی</MenuItemSlide>
-                  <MenuItemSlide>کاپ ریو</MenuItemSlide>
-                  <MenuItemSlide>باندل</MenuItemSlide>
-                </div>
-              ) : undefined}
+
               <ListItem
                 divider
                 button

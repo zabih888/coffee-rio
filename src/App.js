@@ -15,6 +15,7 @@ import AuthProvider from "./context/AuthProvider";
 import Checkout from "./pages/CheckoutPage";
 import ShopUniquePage from "./pages/Shop/ShopUniquePage";
 import Footer from "./components/UI/Footer/Footer";
+
 function App() {
   return (
     <BrowserRouter>
@@ -33,7 +34,7 @@ function App() {
               <Route path="/cup" element={<Cup />} />
               <Route path="/checkout" element={<Checkout />} />
             </Routes>
-            <Footer />
+            {window.location.pathname === "/profile" ? undefined : <Footer />}
           </CartProvider>
         </ThemeProvider>
       </AuthProvider>

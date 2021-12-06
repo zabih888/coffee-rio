@@ -1,10 +1,10 @@
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, useMediaQuery } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useCartActions } from "../../context/CartProvider.js";
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import { PrimaryShop } from "../../components/Global/Buttons";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import {
   FilterBtn,
   FilterMain,
@@ -15,6 +15,7 @@ import { getProducts } from "../../services/productsService.js";
 import { Link } from "react-router-dom";
 
 const ShopPage = () => {
+  const matchesMobile = useMediaQuery("(min-width: 350px)");
   const [data, setData] = useState([]);
   const [dataF, setDataF] = useState(data);
   const [loading, setLoading] = useState(false);
@@ -40,7 +41,6 @@ const ShopPage = () => {
     const filterProduct = data.filter((item) => item.category === typeFilter);
     setDataF(filterProduct);
   };
-  
 
   return (
     <ProductMain className="container">
@@ -61,10 +61,7 @@ const ShopPage = () => {
               </div>
               <Link to={`/shop/${item.id}`}>
                 <PrimaryShop>
-                  ادامه
-                  <span>
-                    <ArrowForwardIcon />
-                  </span>
+                  {matchesMobile ? "مشاهده محصول " : "مشاهده"}
                 </PrimaryShop>
               </Link>
             </div>
